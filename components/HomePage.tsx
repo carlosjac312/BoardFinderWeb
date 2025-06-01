@@ -4,7 +4,7 @@ type Juegos = {
     gamename: string,
     gameinfo: {
         location:string,
-        date: Date, //Ver si dejar esto o poner string
+        date: string,
         description: string
     }
     owner: string,
@@ -14,11 +14,19 @@ type Juegos = {
 }
 
 type Props = {
-    juegos:string, //Poner string correcto una vez implementado
+    juegos:Juegos[],
 }
 
 const HomePage:FunctionComponent<Props> = (props) => (
-    <div>CASITA</div>
+    <div>{props.juegos.map((e)=>{
+        return(
+            <div>
+                <h2>{e.gamename}</h2>
+                <>{e.players.length}/{e.max_players}</>
+                
+            </div>
+        )
+    })}</div>
 );
 
 export default HomePage;

@@ -4,10 +4,12 @@
 
 import * as $_404 from "./routes/_404.tsx";
 import * as $_app from "./routes/_app.tsx";
+import * as $_middleware from "./routes/_middleware.ts";
 import * as $index from "./routes/index.tsx";
 import * as $login from "./routes/login.tsx";
 import * as $paginas_addGame from "./routes/paginas/addGame.tsx";
 import * as $paginas_homepage from "./routes/paginas/homepage.tsx";
+import * as $register from "./routes/register.tsx";
 
 import type { Manifest } from "$fresh/server.ts";
 
@@ -15,10 +17,12 @@ const manifest = {
   routes: {
     "./routes/_404.tsx": $_404,
     "./routes/_app.tsx": $_app,
+    "./routes/_middleware.ts": $_middleware,
     "./routes/index.tsx": $index,
     "./routes/login.tsx": $login,
     "./routes/paginas/addGame.tsx": $paginas_addGame,
     "./routes/paginas/homepage.tsx": $paginas_homepage,
+    "./routes/register.tsx": $register,
   },
   islands: {},
   baseUrl: import.meta.url,

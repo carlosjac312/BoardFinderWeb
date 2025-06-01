@@ -1,5 +1,4 @@
 import { Handlers } from "$fresh/server.ts";
-import { compare } from "https://deno.land/x/bcrypt@v0.4.1/mod.ts";
 import Login from "../components/Login.tsx";
 import PlayersCollection from "../db/Player.ts";
 
@@ -9,7 +8,6 @@ export const handler: Handlers = {
     const nombre = form.get("username")?.toString();
     const contra = form.get("password")?.toString();
 
-    // Validar que ambos campos estén presentes
     if (!nombre || !contra) {
       return new Response("Faltan datos", { status: 400 });
     }
@@ -17,19 +15,23 @@ export const handler: Handlers = {
     // Buscar al usuario en la base de datos
     const foundPlayer = await PlayersCollection.findOne({
       username: nombre,
-      password: contra, // ⚠️ En producción, esto debería compararse con bcrypt
+      password: contra, // ⚠️ Usa bcrypt en producción
     });
-
     if (foundPlayer) {
-      // Redirigir al usuario si existe
       const headers = new Headers();
+    // Establecer cookie correctamente desde el servidor
+      headers.set(
+        "Set-Cookie",
+        `usrID=${foundPlayer.username}; Path=/; Max-Age=31536000;`
+      );
+      // Redirigir a la homepage
       headers.set("location", "/paginas/homepage");
+
       return new Response(null, {
-        status: 303, // See Other
+        status: 303,
         headers,
       });
     } else {
-      // Mostrar error si no se encuentra
       return new Response("Credenciales incorrectas", {
         status: 401,
       });
@@ -42,6 +44,8 @@ const Page = () => <Login />;
 export default Page;
 
 /* Esto es para el register encriptado
+import { compare } from "https://deno.land/x/bcrypt@v0.4.1/mod.ts";
+
 import { hash } from "https://deno.land/x/bcrypt@v0.4.1/mod.ts";
 
 // Registro
