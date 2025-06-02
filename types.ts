@@ -8,7 +8,7 @@ export type Player = {
 };
 
 export type Game = {
-  id: string;
+  _id: ObjectId;
   gamename: string;
   gameinfo: {
     location: string;
@@ -22,4 +22,4 @@ export type Game = {
 };
 
 export type PlayerDB = OptionalId<Omit<Player, "id">>;
-export type GameDB = OptionalId<Omit<Game, "id">>;
+export type GameDB = OptionalId<Game>;

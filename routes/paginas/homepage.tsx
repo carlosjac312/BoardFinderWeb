@@ -4,6 +4,7 @@ import HomePage from "../../components/HomePage.tsx";
 import GamesCollection from "../../db/Games.ts";
 
 type Juegos = {
+  _id:ObjectId,
     gamename: string,
     gameinfo: {
         location: string,

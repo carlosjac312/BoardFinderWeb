@@ -1,6 +1,9 @@
 import { FunctionComponent } from "preact/src/index.d.ts";
+import GameCard from "../islands/gameCard.tsx";
+import { ObjectId } from "mongodb";
 
 type Juegos = {
+    _id:ObjectId
     gamename: string,
     gameinfo: {
         location:string,
@@ -18,15 +21,10 @@ type Props = {
 }
 
 const HomePage:FunctionComponent<Props> = (props) => (
-    <div>{props.juegos.map((e)=>{
-        return(
-            <div>
-                <h2>{e.gamename}</h2>
-                <>{e.players.length}/{e.max_players}</>
-                
-            </div>
-        )
-    })}</div>
+    
+    <div>
+      <GameCard games={props.juegos}/>  
+    </div>
 );
 
 export default HomePage;
