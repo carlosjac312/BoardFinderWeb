@@ -1,0 +1,178 @@
+.game-centrado {
+  display: flex;
+  justify-content: center; /* Centra horizontalmente */
+  align-items: center;     /* Centra verticalmente */
+  min-height: 100vh;       /* Ocupa toda la altura de la pantalla */
+  background-color: #2C3E50; /* Fondo azul oscuro (antes gris) */
+}
+
+.game-centrado form {
+  display: flex;
+  flex-direction: column;  /* Elementos en columna */
+  align-items: center;     /* Centra los inputs horizontalmente */
+  gap: 15px;               /* Espacio entre elementos */
+  width: 300px;            /* Ancho opcional para mejor aspecto */
+}
+
+/* Estilos para los inputs */
+.game-centrado input {
+  width: 100%;             /* Ocupa todo el ancho del form */
+  padding: 10px;
+  border: 1px solid #6b7280; /* Borde gris */
+  border-radius: 4px;
+  background-color: white;
+}
+
+.game-centrado button {
+  width: 100%;
+  padding: 10px;
+  background: #E74C3C; /* Rojo (antes azul) */
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.game-centrado button:hover {
+  background: #c0392b; /* Rojo más oscuro al hover */
+}
+
+h2.game-titulo {
+  font-family: 'Playfair Display', serif;
+  color: #f8f9fa; /* Texto claro (antes azul oscuro) */
+  position: relative;
+  display: inline-block;
+  padding: 0 2rem;
+  font-size: 3rem;
+  margin: 1rem 0;
+  font-weight: 700;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+}
+
+h2.game-titulo::before, 
+h2.game-titulo::after {
+  content: "♣";
+  color: #f59e0b; /* Amarillo/naranja (antes rojo) */
+  position: absolute;
+  font-size: 2.5rem;
+  top: 50%;
+  transform: translateY(-50%);
+  animation: game-pulse 2s infinite;
+}
+
+h2.game-titulo::before { left: -30px; }
+h2.game-titulo::after { right: -30px; }
+
+@keyframes game-pulse {
+  0%, 100% { transform: translateY(-50%) scale(1); }
+  50% { transform: translateY(-50%) scale(1.2); }
+}
+
+a.game-register-link {
+  display: inline-block;
+  margin-top: 1.5rem;
+  color: #f59e0b; /* Amarillo/naranja (antes azul) */
+  font-family: 'Playfair Display', serif;
+  font-weight: 600;
+  text-decoration: none;
+  position: relative;
+  transition: all 0.3s ease;
+  font-size: 0.95rem;
+}
+
+a.game-register-link::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 2px;
+  bottom: -4px;
+  left: 0;
+  background-color: #E74C3C; /* Rojo (antes amarillo) */
+  transform: scaleX(0);
+  transform-origin: bottom right;
+  transition: transform 0.3s ease;
+}
+
+a.game-register-link:hover {
+  color: #f8f9fa; /* Texto claro al hover */
+}
+
+a.game-register-link:hover::after {
+  transform: scaleX(1);
+  transform-origin: bottom left;
+}
+
+a.game-register-link:hover {
+  transform: translateY(-2px);
+}
+.game-loader {
+  width: 54px;
+  height: 54px;
+  position: relative;
+  border-radius: 4px;
+  background-color: #19191a;
+  background-image: radial-gradient(circle 5px, #fff 100%, transparent 0),
+    radial-gradient(circle 5px, #fff 100%, transparent 0),
+    radial-gradient(circle 5px, #fff 100%, transparent 0),
+    radial-gradient(circle 5px, #fff 100%, transparent 0),
+    radial-gradient(circle 5px, #fff 100%, transparent 0),
+    radial-gradient(circle 5px, #fff 100%, transparent 0);
+  background-repeat: no-repeat;
+  animation: move 4s linear infinite, rotate 2s linear infinite;
+}
+
+@keyframes rotate {
+  0%,
+  20% {
+    transform: rotate(0deg);
+  }
+  30%,
+  40% {
+    transform: rotate(90deg);
+  }
+  50%,
+  60% {
+    transform: rotate(180deg);
+  }
+  70%,
+  80% {
+    transform: rotate(270deg);
+  }
+  90%,
+  100% {
+    transform: rotate(360deg);
+  }
+}
+@keyframes move {
+  0%,
+  9% {
+    background-position: -12px -15px, -12px 0px, -12px 15px, 12px -15px,
+      12px 0px, 12px 15px;
+  }
+  10%,
+  25% {
+    background-position: 0px -15px, -12px 0px, -12px 15px, 34px -15px, 12px 0px,
+      12px 15px;
+  }
+  30%,
+  45% {
+    background-position: 0px -34px, -12px -10px, -12px 12px, 34px -15px,
+      12px -10px, 12px 12px;
+  }
+  50%,
+  65% {
+    background-position: 0px -34px, -12px -34px, -12px 12px, 34px -12px,
+      0px -10px, 12px 12px;
+  }
+  70%,
+  85% {
+    background-position: 0px -34px, -12px -34px, 0px 12px, 34px -12px, 0px -10px,
+      34px 12px;
+  }
+  90%,
+  100% {
+    background-position: 0px -34px, -12px -34px, 0px 0px, 34px -12px, 0px 0px,
+      34px 12px;
+  }
+}

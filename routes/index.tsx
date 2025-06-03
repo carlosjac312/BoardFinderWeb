@@ -1,6 +1,6 @@
 import { Handlers } from "$fresh/server.ts";
 
-/*export const handler: Handlers = {
+export const handler: Handlers = {
   GET(_req) {
     const headers = new Headers();
     headers.set("location", "/login");
@@ -9,9 +9,9 @@ import { Handlers } from "$fresh/server.ts";
       headers,
     });
   },
-};*/
+};
 export default function Home() {
   return (
-    <div>Estas en el Index</div>
+    <div>No deberías estar aqui</div>
   );
 }
