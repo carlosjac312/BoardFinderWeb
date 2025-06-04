@@ -1,34 +1,48 @@
-import { FreshContext } from "$fresh/server.ts";
+import { FreshContext, MiddlewareHandler } from "$fresh/server.ts";
 
-export async function handler(req: Request, ctx: FreshContext) {
-
-  // 2. Parseamos la URL para extraer el pathname
+export const handler: MiddlewareHandler = async (req: Request, ctx: FreshContext) => {
   const url = new URL(req.url);
-  const { pathname } = url;
+  const pathname = url.pathname;
 
-  // 4. Protegemos la ruta "/nombre"
-  if (pathname === "/paginas/homepage") {
-    // 4.1 Leemos la cabecera "cookie" (o cadena vacía si no existe)
-    const cookieHeader = req.headers.get("cookie") ?? "";
+  const cookieHeader = req.headers.get("Cookie");
+  const cookies = cookieHeader?.split(";");
+  const name_cookie = cookies?.find((e) => e.trim().startsWith("usrID="));
 
-    // 4.2 Buscamos una cookie concreta llamada "pene"
-    const hasusername = cookieHeader //Esto no debería hacer falta con comprobar que existe la cookie ya esta
-      .split(";")                     // dividimos todas las cookies
-      .some((c) =>                    // comprobamos si alguna empieza por "usrID="
-        c.trim().startsWith("usrID=")
-      );
+  const hasCookie = Boolean(name_cookie);
 
-    // 4.3 Si no encontramos la cookie, redirigimos al inicio ("/")
-    if (!hasusername) {
+  const isProtectedPage = pathname.startsWith("/paginas/");
+  
+  // 🔁 Solo redirige automáticamente desde "/" si tiene cookie y si no lo lleva al login
+  if (hasCookie && pathname === "/") {
+    return new Response(null, {
+      status: 302,
+      headers: {
+        location: "/paginas/homepage",
+      },
+    });
+  } else if(!hasCookie && pathname === "/") {
+    return new Response(null, {
+      status: 302,
+      headers: {
+        location: "/login",
+      },
+    });
+  }
+
+  // ✅ Acceso permitido a páginas protegidas solo si tiene cookie
+  if (isProtectedPage) {
+    if (hasCookie) {
+      return await ctx.next();
+    } else {
       return new Response(null, {
-        status: 307,                 // Redirect temporal
+        status: 302,
         headers: {
-          "Location": "/login"            // ruta de redirección
+          location: "/login",
         },
       });
     }
   }
 
-  // 5. Si todo está OK (o la ruta no es /nombre), dejamos continuar
-  return ctx.next();
-}
+  // 🟢 Todo lo demás (incluyendo /login y /register) está permitido libremente
+  return await ctx.next();
+};

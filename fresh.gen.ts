@@ -6,11 +6,14 @@ import * as $_404 from "./routes/_404.tsx";
 import * as $_app from "./routes/_app.tsx";
 import * as $_middleware from "./routes/_middleware.ts";
 import * as $api_delete_game from "./routes/api/delete-game.ts";
+import * as $api_exit_game from "./routes/api/exit-game.ts";
 import * as $api_update_game from "./routes/api/update-game.ts";
 import * as $index from "./routes/index.tsx";
 import * as $login from "./routes/login.tsx";
+import * as $paginas_layout from "./routes/paginas/_layout.tsx";
 import * as $paginas_addGame from "./routes/paginas/addGame.tsx";
 import * as $paginas_homepage from "./routes/paginas/homepage.tsx";
+import * as $paginas_myGames from "./routes/paginas/myGames.tsx";
 import * as $register from "./routes/register.tsx";
 import * as $gameCard from "./islands/gameCard.tsx";
 import type { Manifest } from "$fresh/server.ts";
@@ -21,11 +24,14 @@ const manifest = {
     "./routes/_app.tsx": $_app,
     "./routes/_middleware.ts": $_middleware,
     "./routes/api/delete-game.ts": $api_delete_game,
+    "./routes/api/exit-game.ts": $api_exit_game,
     "./routes/api/update-game.ts": $api_update_game,
     "./routes/index.tsx": $index,
     "./routes/login.tsx": $login,
+    "./routes/paginas/_layout.tsx": $paginas_layout,
     "./routes/paginas/addGame.tsx": $paginas_addGame,
     "./routes/paginas/homepage.tsx": $paginas_homepage,
+    "./routes/paginas/myGames.tsx": $paginas_myGames,
     "./routes/register.tsx": $register,
   },
   islands: {

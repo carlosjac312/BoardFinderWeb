@@ -36,9 +36,10 @@ export const handler: Handlers<Props> = {
 
       // Consulta optimizada con proyección
       const juegos = await GamesCollection.find({
-        full: { $ne: true },
-        players: { $nin: [usrID] }
+        players: { $in: [usrID] }
       }).toArray();
+
+      console.log(juegos)
 
       return ctx.render({ 
         juegos: juegos
