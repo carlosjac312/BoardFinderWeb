@@ -24,18 +24,33 @@ export const handler: Handlers = {
       return new Response("Invalid game ID", { status: 400 });
     }
 
-    // Update user
-    // Update user
+    //Update user
     await PlayersCollection.updateOne(
       { username },
       { $addToSet: { games_id: objectGameId } },
     );
 
-    // Update game
+    //Update game
     await GamesCollection.updateOne(
       { _id: objectGameId },
       { $addToSet: { players: username } },
     );
+
+    //Obtener el juego actualizado
+    const updatedGame = await GamesCollection.findOne({ _id: objectGameId });
+    if (!updatedGame) {
+      return new Response("Game not found", { status: 404 });
+    }
+
+    //Si se alcanzó el máximo de jugadores, marcar como "full"
+    if (
+      updatedGame.players.length >= updatedGame.max_players && !updatedGame.full
+    ) {
+      await GamesCollection.updateOne(
+        { _id: objectGameId },
+        { $set: { full: true } },
+      );
+    }
 
     return new Response("Game added", { status: 200 });
   },

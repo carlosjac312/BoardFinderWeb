@@ -16,6 +16,7 @@ import * as $paginas_homepage from "./routes/paginas/homepage.tsx";
 import * as $paginas_myGames from "./routes/paginas/myGames.tsx";
 import * as $register from "./routes/register.tsx";
 import * as $gameCard from "./islands/gameCard.tsx";
+import * as $myGamesCard from "./islands/myGamesCard.tsx";
 import type { Manifest } from "$fresh/server.ts";
 
 const manifest = {
@@ -36,6 +37,7 @@ const manifest = {
   },
   islands: {
     "./islands/gameCard.tsx": $gameCard,
+    "./islands/myGamesCard.tsx": $myGamesCard,
   },
   baseUrl: import.meta.url,
 } satisfies Manifest;

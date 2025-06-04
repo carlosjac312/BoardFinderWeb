@@ -2,6 +2,7 @@ import { Handlers, PageProps } from "$fresh/server.ts";
 import { ObjectId } from "mongodb";
 import HomePage from "../../components/HomePage.tsx";
 import GamesCollection from "../../db/Games.ts";
+import UserGames from "../../components/UserGames.tsx";
 
 type Juegos = {
   _id:ObjectId,
@@ -53,7 +54,7 @@ export const handler: Handlers<Props> = {
 };
 
 const Page = (props: PageProps<Props>) => {
-    return <HomePage juegos={props.data.juegos} />;
+    return <UserGames juegos={props.data.juegos} />;
 }
 
 export default Page;
