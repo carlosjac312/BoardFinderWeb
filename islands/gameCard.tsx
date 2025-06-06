@@ -1,4 +1,4 @@
-import { useState } from "preact/hooks";
+import { useEffect, useState } from "preact/hooks";
 import { ObjectId } from "mongodb";
 
 type Juegos = {
@@ -17,6 +17,7 @@ type Juegos = {
 
 export default function GameCard({ games }: { games: Juegos[] }) {
   const [gameslist, setGamesList] = useState<Juegos[]>(games);
+  const [gamename, setGameName] = useState<string>("");
 
   const handleAdd = async (game: Juegos) => {
     const res = await fetch("/api/update-game", {
@@ -37,9 +38,15 @@ export default function GameCard({ games }: { games: Juegos[] }) {
     }
   };
 
+  // Filtrado en tiempo real
+  const filteredGames = gameslist.filter((game) =>
+    game.gamename.toLowerCase().includes(gamename.toLowerCase())
+  );
+
   return (
     <div>
-      {gameslist.map((juego) => {
+      <input type="text" placeholder="Buscar juego..." value={gamename} onInput={(e) => setGameName(e.currentTarget.value)}/>
+      {filteredGames.map((juego) => {
         return (
           <>
             <h3 class="text-xl font-semibold">{juego.gamename}</h3>
