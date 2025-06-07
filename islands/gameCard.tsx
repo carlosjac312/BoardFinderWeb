@@ -1,4 +1,4 @@
-import { useEffect, useState } from "preact/hooks";
+import { useState } from "preact/hooks";
 import { ObjectId } from "mongodb";
 
 type Juegos = {
@@ -30,7 +30,7 @@ export default function GameCard({ games }: { games: Juegos[] }) {
 
     // Si la subida a ido bien repintar lista
     if (res.ok) {
-      const newGameList = gameslist.filter((e)=>e._id!==game._id);
+      const newGameList = gameslist.filter((e) => e._id !== game._id);
       setGamesList(newGameList);
     } else {
       const error = await res.text();
@@ -45,19 +45,43 @@ export default function GameCard({ games }: { games: Juegos[] }) {
 
   return (
     <div>
-      <input type="text" placeholder="Buscar juego..." value={gamename} onInput={(e) => setGameName(e.currentTarget.value)}/>
+      <input
+        type="text"
+        placeholder="Buscar juego..."
+        class="search-input"
+        value={gamename}
+        onInput={(e) => setGameName(e.currentTarget.value)}
+      />
+      <div class="games-container">
       {filteredGames.map((juego) => {
         return (
-          <>
-            <h3 class="text-xl font-semibold">{juego.gamename}</h3>
-            <button
-              onClick={(ev)=>handleAdd(juego)}
-            >
-              Unirse
-            </button>
-          </>
+          <div class={`game-card ${juego.full ? "full" : ""}`}>
+            <h2 class="game-title">{juego.gamename}</h2>
+            <div class="game-info">
+              <p>
+                <strong>Ubicación:</strong> {juego.gameinfo.location}
+              </p>
+              <p>
+                <strong>Fecha:</strong> {juego.gameinfo.date}
+              </p>
+              <p>
+                <strong>Descripción:</strong> {juego.gameinfo.description}
+              </p>
+            </div>
+            <div class="game-meta">
+              <p>
+                <strong>Organizador:</strong> {juego.owner}
+              </p>
+              <p>
+                <strong>Jugadores:</strong> {juego.players.length} /{" "}
+                {juego.max_players}
+              </p>
+            </div>
+            <button onClick={(e)=>handleAdd(juego)}>Unirse</button>
+          </div>
         );
       })}
+      </div>
     </div>
   );
 }

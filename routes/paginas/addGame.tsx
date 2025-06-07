@@ -55,40 +55,54 @@ export const handler: Handlers = {
 };
 
 const Page = () => {
-    return(
-        <div>
-      <h1 >Crear un nuevo juego</h1>
-      <form method="POST" class="space-y-4">
-        <div>
+  return (
+    <div class="form-wrapper">
+      <h1 class="form-title">Crear un nuevo juego</h1>
+      <form method="POST" class="game-form">
+        <div class="form-group">
           <label for="gamename">Nombre del juego</label>
-          <input type="text" name="gamename" id="gamename" required/>
+          <input type="text" name="gamename" id="gamename" required />
         </div>
 
-        <div>
+        <div class="form-group">
           <label for="location">Ubicación</label>
-          <input type="text" name="location" id="location" required/>
+          <input type="text" name="location" id="location" required />
         </div>
 
-        <div>
+        <div class="form-group">
           <label for="date">Fecha (dd/mm/yy)</label>
-          <input type="text" name="date" id="date" required pattern="\d{2}/\d{2}/\d{2}" placeholder="ej. 24/06/25"/>
-          <p class="text-xs text-gray-500 mt-1">Formato requerido: dd/mm/yy</p>
+          <input
+            type="text"
+            name="date"
+            id="date"
+            required
+            pattern="\d{2}/\d{2}/\d{2}"
+            placeholder="ej. 24/06/25"
+          />
+          <p class="form-hint">Formato requerido: dd/mm/yy</p>
         </div>
 
-        <div>
+        <div class="form-group">
           <label for="description">Descripción (opcional)</label>
-          <textarea name="description" id="description" rows={3}/>
+          <textarea name="description" id="description" rows={3} />
         </div>
 
-        <div>
+        <div class="form-group">
           <label for="max_players">Máximo de jugadores</label>
-          <input type="number" name="max_players" id="max_players" min={2} max={15} required/>
+          <input
+            type="number"
+            name="max_players"
+            id="max_players"
+            min={2}
+            max={15}
+            required
+          />
         </div>
 
-        <button type="submit">Crear juego</button>
+        <button type="submit" class="submit-button">Crear juego</button>
       </form>
     </div>
-    )
-}
+  );
+};
 
 export default Page;

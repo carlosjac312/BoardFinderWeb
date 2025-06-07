@@ -1,8 +1,7 @@
 import { Handlers, PageProps } from "$fresh/server.ts";
 import { ObjectId } from "mongodb";
-import HomePage from "../../components/HomePage.tsx";
 import GamesCollection from "../../db/Games.ts";
-import UserGames from "../../components/UserGames.tsx";
+import MyGamesCard from "../../islands/myGamesCard.tsx";
 
 type Juegos = {
   _id:ObjectId,
@@ -40,8 +39,6 @@ export const handler: Handlers<Props> = {
         players: { $in: [usrID] }
       }).toArray();
 
-      console.log(juegos)
-
       return ctx.render({ 
         juegos: juegos
       });
@@ -54,7 +51,7 @@ export const handler: Handlers<Props> = {
 };
 
 const Page = (props: PageProps<Props>) => {
-    return <UserGames juegos={props.data.juegos} />;
+    return <MyGamesCard games={props.data.juegos}/>;
 }
 
 export default Page;

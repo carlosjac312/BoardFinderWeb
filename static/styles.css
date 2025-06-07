@@ -1,3 +1,6 @@
 @import './sub-styles/base.css';
 @import './sub-styles/login.css';
 @import './sub-styles/register.css';
+@import './sub-styles/disposicion.css';
+@import './sub-styles/gamecard.css';
+@import './sub-styles/gameadder.css'

@@ -1,15 +1,24 @@
 import { PageProps } from "$fresh/server.ts";
 
-export default function Layout({ Component, state }: PageProps) {
-  // do something with state here
+export default function Layout({ Component }: PageProps) {
   return (
-    <div>
-        <div>
-            <a href={"/paginas/homepage"}>Buscar Juego</a>
-            <a href={"/paginas/addGame"}>Crear Tablero</a>
-            <a href={"/paginas/myGames"}>Mis partidas</a>
+    <div class="layout-container">
+      <nav class="navbar">
+        <div class="nav-links">
+          <a href="/paginas/homepage" class="nav-link">Buscar Juego</a>
+          <a href="/paginas/addGame" class="nav-link">Crear Tablero</a>
+          <a href="/paginas/myGames" class="nav-link">Mis Partidas</a>
+          <a href="/login" class="logout-link">Cerrar sesión</a>
         </div>
-      <Component />
+      </nav>
+      
+      <main class="main-content">
+        <Component />
+      </main>
+      
+      <footer class="footer">
+        © {new Date().getFullYear()} BoardFinder - Todos los derechos reservados
+      </footer>
     </div>
   );
 }

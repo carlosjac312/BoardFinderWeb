@@ -67,10 +67,31 @@ export default function MyGamesCard({ games }: { games: Juegos[] }) {
 
   return (
     <div>
+      <div class="games-container">
       {gameslist.map((juego) => {
         return (
-          <>
-            <h3 class="text-xl font-semibold">{juego.gamename}</h3>
+          <div class={`game-card ${juego.full ? "full" : ""}`}>
+            <h2 class="game-title">{juego.gamename}</h2>
+            <div class="game-info">
+              <p>
+                <strong>Ubicación:</strong> {juego.gameinfo.location}
+              </p>
+              <p>
+                <strong>Fecha:</strong> {juego.gameinfo.date}
+              </p>
+              <p>
+                <strong>Descripción:</strong> {juego.gameinfo.description}
+              </p>
+            </div>
+            <div class="game-meta">
+              <p>
+                <strong>Organizador:</strong> {juego.owner}
+              </p>
+              <p>
+                <strong>Jugadores:</strong> {juego.players.length} /{" "}
+                {juego.max_players}
+              </p>
+            </div>
             {juego.owner === userValue
               ? <button onClick={(ev) => handleDelete(juego)}>Borrar juego</button>
               : (
@@ -78,9 +99,10 @@ export default function MyGamesCard({ games }: { games: Juegos[] }) {
                   Abandonar juego
                 </button>
               )}
-          </>
+          </div>
         );
       })}
+      </div>
     </div>
   );
 }
