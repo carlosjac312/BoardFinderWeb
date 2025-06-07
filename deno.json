@@ -32,5 +32,11 @@
   "compilerOptions": {
     "jsx": "react-jsx",
     "jsxImportSource": "preact"
+  },
+  "deploy": {
+    "project": "675f69dc-13bf-45a6-a769-0b28c6d64d03",
+    "exclude": [],
+    "include": [],
+    "entrypoint": "main.ts"
   }
 }

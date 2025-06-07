@@ -1,11 +1,3 @@
-body {
-  font-family: system-ui, sans-serif;
-  background-color: #f5f7fa;
-  margin: 0;
-  padding: 2rem;
-  color: #333;
-}
-
 .game-card {
   background-color: #fff;
   border: 1px solid #e1e1e1;
