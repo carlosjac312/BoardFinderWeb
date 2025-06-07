@@ -32,26 +32,19 @@ export const handler: Handlers = {
         headers,
       });
     } else {
-      return new Response("Credenciales incorrectas", {
-        status: 401,
+      // Redirigir de vuelta al formulario con mensaje de error
+      const headers = new Headers();
+      headers.set("location", "/login/?error=Credenciales+incorrectas");
+      return new Response(null, {
+        status: 303,
+        headers,
       });
     }
   },
 };
 
-const Page = () => <Login />;
-
+const Page = ({ url }: { url: URL }) => {
+  const error = url.searchParams.get("error");
+  return(<Login error={error}/>);
+}
 export default Page;
-
-/* Esto es para el register encriptado
-import { compare } from "https://deno.land/x/bcrypt@v0.4.1/mod.ts";
-
-import { hash } from "https://deno.land/x/bcrypt@v0.4.1/mod.ts";
-
-// Registro
-const hashedPassword = await hash(password);
-await PlayersCollection.insertOne({
-  username,
-  password: hashedPassword,
-});
-*/
