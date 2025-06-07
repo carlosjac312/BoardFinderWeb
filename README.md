@@ -1,7 +1,6 @@
 # Fresh project
 
-Your new Fresh project is ready to go. You can follow the Fresh "Getting
-Started" guide here: https://fresh.deno.dev/docs/getting-started
+Si se quiere ejecutar de forma local asegurese de instalar deno con el link ofrecido mas abajo
 
 ### Usage
 
