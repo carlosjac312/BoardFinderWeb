@@ -29,7 +29,7 @@ jobs:
       - name: Upload to Deno Deploy
         uses: denoland/deployctl@v1
         with:
-          project: "carlosjac31-boardfinder-60"
+          project: "carlosjac31-boardfinder-61"
           entrypoint: "main.ts"
           root: "."
           
