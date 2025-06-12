@@ -26,7 +26,7 @@ export default function MyGamesCard({ games }: { games: Juegos[] }) {
     const value = userCookie ? userCookie.split("=")[1] : null;
     setUserValue(value);
   }, []);
-
+  //Llamada al endpoint para salir del juego
   const handleExit = async (game: Juegos) => {
     const res = await fetch("/api/exit-game", {
       method: "POST",
@@ -45,7 +45,7 @@ export default function MyGamesCard({ games }: { games: Juegos[] }) {
       alert(`Error: ${error}`);
     }
   };
-
+  //LLamada al endpoint parta borrar el juego
   const handleDelete = async (game: Juegos) => {
     const res = await fetch("/api/delete-game", {
       method: "POST",
