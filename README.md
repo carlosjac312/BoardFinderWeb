@@ -13,3 +13,11 @@ deno task start
 ```
 
 This will watch the project directory and restart as necessary.
+
+# Deployments
+
+- [Versión principal](https://carlosjac31-boardfinder-61.deno.dev)
+- [Versión alternativa](https://carlosjac31-boardfinder-61-jhvaq5e8g427.deno.dev)
+
+#Demo
+-[Video a youtube](https://youtu.be/jzVA0cJMHeY)
